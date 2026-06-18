@@ -1,0 +1,59 @@
+name: Weekly Portfolio Model Update
+
+on:
+  schedule:
+    # Every Sunday at 06:30 IST (= 01:00 UTC)
+    - cron: '0 1 * * 0'
+  workflow_dispatch:  # manual trigger from GitHub UI
+
+jobs:
+  update-portfolio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run portfolio update pipeline
+        run: |
+          python update_portfolio_model.py --template PERSONALISED_PORTFOLIO_ALLOCATION_MODEL_.xlsx
+        env:
+          # Add any API keys here as GitHub secrets
+          PYTHONUNBUFFERED: 1
+
+      - name: Upload updated Excel artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-model-${{ github.run_id }}
+          path: |
+            output/PORTFOLIO_MODEL_UPDATED_*.xlsx
+            output/*.csv
+            logs/*.log
+          retention-days: 30
+
+      - name: Commit updated files back to repo (optional)
+        if: success()
+        run: |
+          git config user.name "Portfolio Bot"
+          git config user.email "bot@portfolio.local"
+          git add output/ logs/ || true
+          git diff --cached --quiet || git commit -m "Auto-update: $(date +'%Y-%m-%d %H:%M IST')"
+          git push || echo "Nothing to push or push failed (set repo permissions)"
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Pipeline failed. Check logs above for details."
+          # Add Slack/email notification here if desired
