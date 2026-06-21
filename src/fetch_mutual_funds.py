@@ -116,6 +116,8 @@ def fuzzy_match_schemes(user_schemes: pd.DataFrame, amfi_df: pd.DataFrame) -> pd
         return " ".join(s.split())
 
     amfi_df["_norm"] = amfi_df["scheme_name"].apply(normalize)
+    amfi_df["_tokens"] = amfi_df["_norm"].apply(lambda x: set(x.split()))
+    
     matches = []
     for _, row in user_schemes.iterrows():
         user_norm = normalize(row["scheme_name"])
@@ -125,7 +127,7 @@ def fuzzy_match_schemes(user_schemes: pd.DataFrame, amfi_df: pd.DataFrame) -> pd
         best_score = 0
         best_match = None
         for _, a_row in amfi_df.iterrows():
-            a_tokens = set(a_row["_norm"].split())
+            a_tokens = a_row["_tokens"]
             if not a_tokens or not user_tokens:
                 continue
             # Jaccard-like score
@@ -162,23 +164,23 @@ def fuzzy_match_schemes(user_schemes: pd.DataFrame, amfi_df: pd.DataFrame) -> pd
 
 
 # ─── Step 3: Fetch historical NAV & compute analytics ────────────────────────
-@retry(max_attempts=2, delay=2)
-def fetch_scheme_history(scheme_code: str) -> Optional[pd.DataFrame]:
+@retry(max_attempts=3, delay=2, backoff=2)
+def fetch_scheme_history(scheme_code) -> pd.DataFrame:
     """Get full historical NAV from mfapi.in (free, no auth)."""
-    try:
-        r = requests.get(f"{MFAPI_BASE}/{scheme_code}", timeout=15)
-        r.raise_for_status()
-        data = r.json()
-        if "data" not in data or not data["data"]:
-            return None
-        df = pd.DataFrame(data["data"])
-        df["date"] = pd.to_datetime(df["date"], format="%d-%m-%Y")
-        df["nav"] = df["nav"].astype(float)
-        df = df.sort_values("date").reset_index(drop=True)
-        return df
-    except Exception as e:
-        log.debug(f"   MFAPI error for {scheme_code}: {e}")
-        return None
+    if pd.isna(scheme_code):
+        raise ValueError("Scheme code is NaN")
+    # Cast to clean integer string, e.g. 129195.0 -> "129195"
+    code_str = str(int(float(scheme_code)))
+    r = requests.get(f"{MFAPI_BASE}/{code_str}", timeout=15)
+    r.raise_for_status()
+    data = r.json()
+    if "data" not in data or not data["data"]:
+        raise ValueError(f"No history data returned for scheme {code_str}")
+    df = pd.DataFrame(data["data"])
+    df["date"] = pd.to_datetime(df["date"], format="%d-%m-%Y")
+    df["nav"] = df["nav"].astype(float)
+    df = df.sort_values("date").reset_index(drop=True)
+    return df
 
 
 def compute_period_return(nav_df: pd.DataFrame, days_back: int) -> Optional[float]:
@@ -254,9 +256,11 @@ def process_scheme(scheme_row: dict) -> dict:
         base["_status"] = "NO_AMFI_MATCH"
         return base
 
-    hist = fetch_scheme_history(scheme_row["scheme_code"])
-    if hist is None or hist.empty:
-        base["_status"] = "NO_HISTORY"
+    try:
+        hist = fetch_scheme_history(scheme_row["scheme_code"])
+    except Exception as e:
+        log.warning(f"   ⚠️  No history for {scheme_row['scheme_name']}: {e}")
+        base["_status"] = f"ERROR: {e}"
         return base
 
     # Period returns

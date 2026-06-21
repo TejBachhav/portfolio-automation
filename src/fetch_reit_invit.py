@@ -71,10 +71,12 @@ FUNDAMENTAL_OVERRIDES = {
 }
 
 
-@retry(max_attempts=3, delay=4)
+@retry(max_attempts=3, delay=3, backoff=2)
 def fetch_history(symbol: str, period: str = "1y") -> pd.DataFrame:
     ticker = REIT_TICKER_MAP.get(symbol, f"{symbol}.NS")
     hist = yf.Ticker(ticker).history(period=period, auto_adjust=True)
+    if hist.empty or len(hist) < 50:
+        raise ValueError(f"Empty or insufficient history for {ticker}")
     return hist
 
 

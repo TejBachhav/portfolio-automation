@@ -36,53 +36,55 @@ def update_excel(template_path: str, output_path: str = None) -> str:
 
     wb = load_workbook(output_path)
 
+    stats = {}
+
     # ─── Sheet 1: Nifty 500 ──────────────────────────────────────────────────
-    _update_sheet(wb, "Nifty 500",
-                  csv_path=get_output_path("nifty500_latest.csv"),
-                  match_col="Company Name",
-                  sheet_match_col="Company Name")
+    stats["Nifty 500"] = _update_sheet(wb, "Nifty 500",
+                                       csv_path=get_output_path("nifty500_latest.csv"),
+                                       match_col="Company Name",
+                                       sheet_match_col="Company Name")
 
     # ─── Sheet 2: S&P 500 ────────────────────────────────────────────────────
-    _update_sheet(wb, "S&P 500",
-                  csv_path=get_output_path("sp500_latest.csv"),
-                  match_col="Symbol",
-                  sheet_match_col="Symbol")
+    stats["S&P 500"] = _update_sheet(wb, "S&P 500",
+                                     csv_path=get_output_path("sp500_latest.csv"),
+                                     match_col="Symbol",
+                                     sheet_match_col="Symbol")
 
     # ─── Sheet 3: EQUITY MF ──────────────────────────────────────────────────
-    _update_sheet(wb, "EQUITY MF",
-                  csv_path=get_output_path("equity_mf_latest.csv"),
-                  match_col="SCHEMES",
-                  sheet_match_col="SCHEMES")
+    stats["EQUITY MF"] = _update_sheet(wb, "EQUITY MF",
+                                       csv_path=get_output_path("equity_mf_latest.csv"),
+                                       match_col="SCHEMES",
+                                       sheet_match_col="SCHEMES")
 
     # ─── Sheet 4: DEBT MF ────────────────────────────────────────────────────
-    _update_sheet(wb, "DEBT MF",
-                  csv_path=get_output_path("debt_mf_latest.csv"),
-                  match_col="SCHEMES",
-                  sheet_match_col="SCHEMES")
+    stats["DEBT MF"] = _update_sheet(wb, "DEBT MF",
+                                     csv_path=get_output_path("debt_mf_latest.csv"),
+                                     match_col="SCHEMES",
+                                     sheet_match_col="SCHEMES")
 
     # ─── Sheet 5: REITINVIT ──────────────────────────────────────────────────
-    _update_sheet(wb, "REITINVIT",
-                  csv_path=get_output_path("reit_invit_latest.csv"),
-                  match_col="symbol",
-                  sheet_match_col="symbol")
+    stats["REITINVIT"] = _update_sheet(wb, "REITINVIT",
+                                       csv_path=get_output_path("reit_invit_latest.csv"),
+                                       match_col="symbol",
+                                       sheet_match_col="symbol")
 
     # Add a metadata sheet
-    _add_metadata_sheet(wb)
+    _add_metadata_sheet(wb, stats)
 
     wb.save(output_path)
     log.info(f"✅ Excel saved → {output_path}")
     return output_path
 
 
-def _update_sheet(wb, sheet_name: str, csv_path: Path, match_col: str, sheet_match_col: str):
-    """Update one sheet in-place."""
+def _update_sheet(wb, sheet_name: str, csv_path: Path, match_col: str, sheet_match_col: str) -> dict:
+    """Update one sheet in-place. Returns stats dictionary."""
     csv_path = Path(csv_path)
     if not csv_path.exists():
         log.warning(f"   Skipping {sheet_name} — no CSV at {csv_path}")
-        return
+        return {"total": 0, "updated": 0, "failed": 0, "cell_updates": 0}
     if sheet_name not in wb.sheetnames:
         log.warning(f"   Sheet '{sheet_name}' not in workbook")
-        return
+        return {"total": 0, "updated": 0, "failed": 0, "cell_updates": 0}
 
     df = pd.read_csv(csv_path)
     ws = wb[sheet_name]
@@ -94,13 +96,30 @@ def _update_sheet(wb, sheet_name: str, csv_path: Path, match_col: str, sheet_mat
     match_col_idx = headers.get(sheet_match_col)
     if not match_col_idx:
         log.warning(f"   {sheet_name}: match column '{sheet_match_col}' not in headers")
-        return
+        return {"total": len(df), "updated": 0, "failed": len(df), "cell_updates": 0}
 
     row_map = {}  # value → row_num
     for row_num in range(2, ws.max_row + 1):
         val = ws.cell(row=row_num, column=match_col_idx).value
         if val:
             row_map[str(val).strip()] = row_num
+
+    # Calculate status counts from the CSV data
+    status_col = "_status" if "_status" in df.columns else "Status"
+    updated_rows = 0
+    failed_rows = 0
+    
+    if status_col in df.columns:
+        updated_rows = int((df[status_col] == "OK").sum())
+        failed_rows = len(df) - updated_rows
+    else:
+        # Fallback if no status column
+        for _, data_row in df.iterrows():
+            key = data_row.get(match_col)
+            if pd.notna(key) and str(key).strip() in row_map:
+                updated_rows += 1
+            else:
+                failed_rows += 1
 
     updates = 0
     for _, data_row in df.iterrows():
@@ -114,13 +133,16 @@ def _update_sheet(wb, sheet_name: str, csv_path: Path, match_col: str, sheet_mat
 
         for col_name, col_idx in headers.items():
             if col_name in data_row and pd.notna(data_row[col_name]):
+                if str(col_name).startswith("_"):
+                    continue
                 ws.cell(row=row_num, column=col_idx, value=data_row[col_name])
                 updates += 1
 
     log.info(f"   {sheet_name}: {updates} cell updates across {len(df)} rows")
+    return {"total": len(df), "updated": updated_rows, "failed": failed_rows, "cell_updates": updates}
 
 
-def _add_metadata_sheet(wb):
+def _add_metadata_sheet(wb, stats: dict):
     """Add an UPDATE_LOG sheet with timestamps and stats."""
     if "UPDATE_LOG" in wb.sheetnames:
         del wb["UPDATE_LOG"]
@@ -130,31 +152,48 @@ def _add_metadata_sheet(wb):
     ws["A1"].font = ws["A1"].font.copy(bold=True, size=14)
     ws["A3"] = "Update Time:"
     ws["B3"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    ws["A4"] = "Sheets Updated:"
-    ws["B4"] = "Nifty 500, S&P 500, EQUITY MF, DEBT MF, REITINVIT"
+    ws["A4"] = "Overall Status:"
+    
+    any_failed = any(s.get("failed", 0) > 0 for s in stats.values() if s)
+    ws["B4"] = "WARNING (Some rows failed/skipped)" if any_failed else "OK (All updated)"
 
     ws["A6"] = "Sheet"
     ws["B6"] = "Source"
-    ws["C6"] = "Status"
-    ws["D6"] = "Last Refresh"
+    ws["C6"] = "Total Rows"
+    ws["D6"] = "Success (Updated)"
+    ws["E6"] = "Failed/No Data"
+    ws["F6"] = "Cell Updates"
+    ws["G6"] = "Last Refresh"
+
+    # Set headers to bold
+    for col in range(1, 8):
+        cell = ws.cell(row=6, column=col)
+        cell.font = cell.font.copy(bold=True)
 
     data_sources = [
-        ("Nifty 500", "yfinance + computed technicals (pandas)", "OK"),
-        ("S&P 500", "yfinance + DCF intrinsic value", "OK"),
-        ("EQUITY MF", "AMFI India + MFAPI.in", "OK"),
-        ("DEBT MF", "AMFI India + MFAPI.in", "OK"),
-        ("REITINVIT", "yfinance + manual quarterly overrides", "OK"),
+        ("Nifty 500", "yfinance + computed technicals (pandas)"),
+        ("S&P 500", "yfinance + DCF intrinsic value"),
+        ("EQUITY MF", "AMFI India + MFAPI.in"),
+        ("DEBT MF", "AMFI India + MFAPI.in"),
+        ("REITINVIT", "yfinance + manual quarterly overrides"),
     ]
-    for i, (sh, src, st) in enumerate(data_sources, start=7):
+    for i, (sh, src) in enumerate(data_sources, start=7):
         ws.cell(row=i, column=1, value=sh)
         ws.cell(row=i, column=2, value=src)
-        ws.cell(row=i, column=3, value=st)
-        ws.cell(row=i, column=4, value=datetime.now().strftime("%Y-%m-%d %H:%M"))
+        s = stats.get(sh, {})
+        ws.cell(row=i, column=3, value=s.get("total", "N/A"))
+        ws.cell(row=i, column=4, value=s.get("updated", "N/A"))
+        ws.cell(row=i, column=5, value=s.get("failed", "N/A"))
+        ws.cell(row=i, column=6, value=s.get("cell_updates", "N/A"))
+        ws.cell(row=i, column=7, value=datetime.now().strftime("%Y-%m-%d %H:%M"))
 
     ws.column_dimensions["A"].width = 18
     ws.column_dimensions["B"].width = 45
-    ws.column_dimensions["C"].width = 12
-    ws.column_dimensions["D"].width = 20
+    ws.column_dimensions["C"].width = 15
+    ws.column_dimensions["D"].width = 18
+    ws.column_dimensions["E"].width = 18
+    ws.column_dimensions["F"].width = 15
+    ws.column_dimensions["G"].width = 20
 
 
 if __name__ == "__main__":

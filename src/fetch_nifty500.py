@@ -80,52 +80,48 @@ def company_name_to_ticker(name: str) -> str:
     return f"{base}.NS"
 
 
-@retry(max_attempts=3, delay=5, backoff=2)
-def fetch_yfinance_data(ticker: str, period: str = "1y") -> Optional[pd.DataFrame]:
+@retry(max_attempts=3, delay=3, backoff=2)
+def fetch_yfinance_data(ticker: str, period: str = "1y") -> pd.DataFrame:
     """Fetch OHLCV history for a single ticker."""
-    try:
-        t = yf.Ticker(ticker)
-        hist = t.history(period=period, auto_adjust=True)
-        if hist.empty or len(hist) < 50:
-            return None
-        return hist
-    except Exception as e:
-        log.warning(f"yfinance error for {ticker}: {e}")
-        return None
+    t = yf.Ticker(ticker)
+    hist = t.history(period=period, auto_adjust=True)
+    if hist.empty or len(hist) < 50:
+        raise ValueError(f"Empty or insufficient history for {ticker}")
+    return hist
 
 
+@retry(max_attempts=3, delay=2, backoff=2)
 def get_market_cap(ticker: str) -> Optional[float]:
     """Get current market cap in Rs. Crores."""
-    try:
-        t = yf.Ticker(ticker)
-        info = t.info
-        cap = info.get("marketCap")
-        if cap:
-            return round(cap / 1e7, 2)  # convert to Rs. Crores
-    except Exception:
-        pass
+    t = yf.Ticker(ticker)
+    info = t.info
+    if not info:
+        raise ValueError(f"Empty info dict returned for {ticker}")
+    cap = info.get("marketCap")
+    if cap:
+        return round(cap / 1e7, 2)  # convert to Rs. Crores
     return None
 
 
+@retry(max_attempts=3, delay=2, backoff=2)
 def get_fundamentals_yfinance(ticker: str) -> dict:
     """Pull fundamentals available via yfinance's info dict."""
-    try:
-        info = yf.Ticker(ticker).info
-        return {
-            "P/E": info.get("trailingPE"),
-            "P/B": info.get("priceToBook"),
-            "EV/EBITDA": info.get("enterpriseToEbitda"),
-            "ROE %": (info.get("returnOnEquity") or 0) * 100 if info.get("returnOnEquity") else None,
-            "ROA %": (info.get("returnOnAssets") or 0) * 100 if info.get("returnOnAssets") else None,
-            "Earnings Yield %": (info.get("earningsYield") or 0) * 100 if info.get("earningsYield") else None,
-            "Sales growth %": (info.get("revenueGrowth") or 0) * 100 if info.get("revenueGrowth") else None,
-            "Profit growth %": (info.get("earningsGrowth") or 0) * 100 if info.get("earningsGrowth") else None,
-            "Sector": info.get("sector"),
-            "Industry": info.get("industry"),
-        }
-    except Exception as e:
-        log.warning(f"Fundamentals fetch failed for {ticker}: {e}")
-        return {}
+    t = yf.Ticker(ticker)
+    info = t.info
+    if not info:
+        raise ValueError(f"Empty info dict returned for {ticker}")
+    return {
+        "P/E": info.get("trailingPE"),
+        "P/B": info.get("priceToBook"),
+        "EV/EBITDA": info.get("enterpriseToEbitda"),
+        "ROE %": (info.get("returnOnEquity") or 0) * 100 if info.get("returnOnEquity") else None,
+        "ROA %": (info.get("returnOnAssets") or 0) * 100 if info.get("returnOnAssets") else None,
+        "Earnings Yield %": (info.get("earningsYield") or 0) * 100 if info.get("earningsYield") else None,
+        "Sales growth %": (info.get("revenueGrowth") or 0) * 100 if info.get("revenueGrowth") else None,
+        "Profit growth %": (info.get("earningsGrowth") or 0) * 100 if info.get("earningsGrowth") else None,
+        "Sector": info.get("sector"),
+        "Industry": info.get("industry"),
+    }
 
 
 # ─── Technical indicators (pure pandas, no extra deps required) ──────────────
@@ -185,14 +181,16 @@ def compute_targets(close: float, atr: float, sma50: float) -> tuple:
 
 
 # ─── Main fetcher ────────────────────────────────────────────────────────────
-def process_stock(company_name: str, industry: str) -> dict:
-    ticker = company_name_to_ticker(company_name)
+def process_stock(company_name: str, industry: str, ticker: str = None) -> dict:
+    if not ticker or pd.isna(ticker):
+        ticker = company_name_to_ticker(company_name)
 
     # Price history
-    hist = fetch_yfinance_data(ticker, period="1y")
-    if hist is None or hist.empty:
-        log.warning(f"  ⚠️  No data for {company_name} ({ticker})")
-        return {"Company Name": company_name, "Industry": industry, "_ticker": ticker, "_status": "NO_DATA"}
+    try:
+        hist = fetch_yfinance_data(ticker, period="1y")
+    except Exception as e:
+        log.warning(f"  ⚠️  No data for {company_name} ({ticker}): {e}")
+        return {"Company Name": company_name, "Industry": industry, "_ticker": ticker, "_status": f"ERROR: {e}"}
 
     close_series = hist["Close"]
     last_close = float(close_series.iloc[-1])
@@ -255,7 +253,8 @@ def run(input_csv: str = None, limit: int = None) -> pd.DataFrame:
         if i % 25 == 0 and i > 0:
             log.info(f"   Progress: {i}/{len(df_in)} ({i/len(df_in)*100:.1f}%)")
         try:
-            results.append(process_stock(row["company_name"], row.get("industry", "")))
+            ticker = row.get("ticker") if "ticker" in row else None
+            results.append(process_stock(row["company_name"], row.get("industry", ""), ticker))
         except Exception as e:
             log.error(f"   Error processing {row['company_name']}: {e}")
             results.append({"Company Name": row["company_name"], "_status": f"ERROR: {e}"})

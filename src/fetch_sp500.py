@@ -26,16 +26,12 @@ from .utils import setup_logger, retry, get_config_path, get_output_path, now_is
 log = setup_logger("sp500")
 
 
-@retry(max_attempts=3, delay=5, backoff=2)
-def fetch_history(ticker: str, period: str = "1y") -> Optional[pd.DataFrame]:
-    try:
-        hist = yf.Ticker(ticker).history(period=period, auto_adjust=True)
-        if hist.empty or len(hist) < 50:
-            return None
-        return hist
-    except Exception as e:
-        log.warning(f"  yfinance history error for {ticker}: {e}")
-        return None
+@retry(max_attempts=3, delay=3, backoff=2)
+def fetch_history(ticker: str, period: str = "1y") -> pd.DataFrame:
+    hist = yf.Ticker(ticker).history(period=period, auto_adjust=True)
+    if hist.empty or len(hist) < 50:
+        raise ValueError(f"Empty or insufficient history for {ticker}")
+    return hist
 
 
 def safe_pct(val):
@@ -149,10 +145,11 @@ def technical_view_score(close: float, sma50: float, sma200: float, atr: float, 
 
 
 def process_symbol(symbol: str, company_name: str, sector: str) -> dict:
-    hist = fetch_history(symbol, period="1y")
-    if hist is None or hist.empty:
-        log.warning(f"  ⚠️  No data for {symbol}")
-        return {"Symbol": symbol, "Company Name": company_name, "Sector": sector, "_status": "NO_DATA"}
+    try:
+        hist = fetch_history(symbol, period="1y")
+    except Exception as e:
+        log.warning(f"  ⚠️  No data for {symbol}: {e}")
+        return {"Symbol": symbol, "Company Name": company_name, "Sector": sector, "_status": f"ERROR: {e}"}
 
     close_series = hist["Close"]
     close = float(close_series.iloc[-1])
