@@ -1,0 +1,86 @@
+2026-06-22 00:27:19 | INFO    | mutual_funds | 📥 Downloading AMFI NAV master file…
+2026-06-22 00:27:19 | INFO    | mutual_funds |    AMFI: parsed 14219 schemes
+2026-06-22 00:27:19 | INFO    | mutual_funds | 🔗 Matching 2 user schemes to AMFI master…
+2026-06-22 00:27:20 | INFO    | mutual_funds |    Matched 2/2 (100.0%)
+2026-06-22 00:36:18 | INFO    | orchestrator | ======================================================================
+2026-06-22 00:36:18 | INFO    | orchestrator | 🚀 PORTFOLIO MODEL UPDATE — started 2026-06-22 00:36:18.346738
+2026-06-22 00:36:18 | INFO    | orchestrator |    Mode: nifty500  |  Test: False  |  Template: PERSONALISED_PORTFOLIO_ALLOCATION_MODEL_.xlsx
+2026-06-22 00:36:18 | INFO    | orchestrator | ======================================================================
+2026-06-22 00:36:18 | INFO    | nifty500 | 📊 Starting Nifty 500 fetch for 498 stocks…
+2026-06-22 00:36:38 | INFO    | nifty500 |    Progress: 25/498 (5.0%)
+2026-06-22 00:36:57 | INFO    | nifty500 |    Progress: 50/498 (10.0%)
+2026-06-22 00:37:16 | INFO    | nifty500 |    Progress: 75/498 (15.1%)
+2026-06-22 00:37:35 | INFO    | nifty500 |    Progress: 100/498 (20.1%)
+2026-06-22 00:37:55 | INFO    | nifty500 |    Progress: 125/498 (25.1%)
+2026-06-22 00:38:14 | INFO    | nifty500 |    Progress: 150/498 (30.1%)
+2026-06-22 00:38:32 | INFO    | nifty500 |    Progress: 175/498 (35.1%)
+2026-06-22 00:38:51 | INFO    | nifty500 |    Progress: 200/498 (40.2%)
+2026-06-22 00:39:11 | INFO    | nifty500 |    Progress: 225/498 (45.2%)
+2026-06-22 00:39:31 | INFO    | nifty500 |    Progress: 250/498 (50.2%)
+2026-06-22 00:39:50 | INFO    | nifty500 |    Progress: 275/498 (55.2%)
+2026-06-22 00:40:09 | INFO    | nifty500 |    Progress: 300/498 (60.2%)
+2026-06-22 00:40:29 | INFO    | nifty500 |    Progress: 325/498 (65.3%)
+2026-06-22 00:40:48 | INFO    | nifty500 |    Progress: 350/498 (70.3%)
+2026-06-22 00:41:08 | INFO    | nifty500 |    Progress: 375/498 (75.3%)
+2026-06-22 00:41:34 | WARNING | nifty500 |   ⚠️  No data for Gujarat State Petronet Ltd. (GUJARAT.NS): Empty or insufficient history for GUJARAT.NS
+2026-06-22 00:41:43 | INFO    | nifty500 |    Progress: 400/498 (80.3%)
+2026-06-22 00:42:03 | INFO    | nifty500 |    Progress: 425/498 (85.3%)
+2026-06-22 00:42:22 | INFO    | nifty500 |    Progress: 450/498 (90.4%)
+2026-06-22 00:42:41 | INFO    | nifty500 |    Progress: 475/498 (95.4%)
+2026-06-22 00:43:01 | WARNING | nifty500 |   ⚠️  No data for International Gemmological Institute (India) Ltd. (INTERNATIONAL.NS): Empty or insufficient history for INTERNATIONAL.NS
+2026-06-22 00:43:10 | INFO    | nifty500 | ✅ Nifty 500 done. 498 rows → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\nifty500_latest.csv
+2026-06-22 00:43:10 | INFO    | orchestrator | 
+======================================================================
+2026-06-22 00:43:10 | INFO    | orchestrator | 📊 WRITING BACK TO EXCEL
+2026-06-22 00:43:10 | INFO    | orchestrator | ======================================================================
+2026-06-22 00:43:10 | INFO    | excel_writer | 📋 Copying template → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\PORTFOLIO_MODEL_UPDATED_20260622_004310.xlsx
+2026-06-22 00:43:12 | INFO    | excel_writer |    Nifty 500: 12221 cell updates across 498 rows
+2026-06-22 00:43:12 | INFO    | excel_writer |    S&P 500: 14922 cell updates across 503 rows
+2026-06-22 00:43:13 | INFO    | excel_writer |    EQUITY MF: 30751 cell updates across 1649 rows
+2026-06-22 00:43:13 | INFO    | excel_writer |    DEBT MF: 10346 cell updates across 462 rows
+2026-06-22 00:43:13 | INFO    | excel_writer |    REITINVIT: 213 cell updates across 11 rows
+2026-06-22 00:43:15 | INFO    | excel_writer | ✅ Excel saved → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\PORTFOLIO_MODEL_UPDATED_20260622_004310.xlsx
+2026-06-22 00:43:15 | INFO    | orchestrator | 
+🎉 SUCCESS — updated workbook at: C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\PORTFOLIO_MODEL_UPDATED_20260622_004310.xlsx
+2026-06-22 00:43:15 | INFO    | orchestrator | 
+⏱  Total time: 7.0 minutes
+2026-06-22 00:43:29 | INFO    | orchestrator | ======================================================================
+2026-06-22 00:43:29 | INFO    | orchestrator | 🚀 PORTFOLIO MODEL UPDATE — started 2026-06-22 00:43:29.495467
+2026-06-22 00:43:29 | INFO    | orchestrator |    Mode: nifty500  |  Test: False  |  Template: PERSONALISED_PORTFOLIO_ALLOCATION_MODEL_.xlsx
+2026-06-22 00:43:29 | INFO    | orchestrator | ======================================================================
+2026-06-22 00:43:29 | INFO    | nifty500 | 📊 Starting Nifty 500 fetch for 498 stocks…
+2026-06-22 00:43:49 | INFO    | nifty500 |    Progress: 25/498 (5.0%)
+2026-06-22 00:44:09 | INFO    | nifty500 |    Progress: 50/498 (10.0%)
+2026-06-22 00:44:29 | INFO    | nifty500 |    Progress: 75/498 (15.1%)
+2026-06-22 00:44:49 | INFO    | nifty500 |    Progress: 100/498 (20.1%)
+2026-06-22 00:45:08 | INFO    | nifty500 |    Progress: 125/498 (25.1%)
+2026-06-22 00:45:27 | INFO    | nifty500 |    Progress: 150/498 (30.1%)
+2026-06-22 00:45:46 | INFO    | nifty500 |    Progress: 175/498 (35.1%)
+2026-06-22 00:46:06 | INFO    | nifty500 |    Progress: 200/498 (40.2%)
+2026-06-22 00:46:25 | INFO    | nifty500 |    Progress: 225/498 (45.2%)
+2026-06-22 00:46:47 | INFO    | nifty500 |    Progress: 250/498 (50.2%)
+2026-06-22 00:47:07 | INFO    | nifty500 |    Progress: 275/498 (55.2%)
+2026-06-22 00:47:27 | INFO    | nifty500 |    Progress: 300/498 (60.2%)
+2026-06-22 00:47:46 | INFO    | nifty500 |    Progress: 325/498 (65.3%)
+2026-06-22 00:48:05 | INFO    | nifty500 |    Progress: 350/498 (70.3%)
+2026-06-22 00:48:25 | INFO    | nifty500 |    Progress: 375/498 (75.3%)
+2026-06-22 00:48:46 | INFO    | nifty500 |    Progress: 400/498 (80.3%)
+2026-06-22 00:49:06 | INFO    | nifty500 |    Progress: 425/498 (85.3%)
+2026-06-22 00:49:26 | INFO    | nifty500 |    Progress: 450/498 (90.4%)
+2026-06-22 00:49:45 | INFO    | nifty500 |    Progress: 475/498 (95.4%)
+2026-06-22 00:50:03 | INFO    | nifty500 | ✅ Nifty 500 done. 498 rows → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\nifty500_latest.csv
+2026-06-22 00:50:03 | INFO    | orchestrator | 
+======================================================================
+2026-06-22 00:50:03 | INFO    | orchestrator | 📊 WRITING BACK TO EXCEL
+2026-06-22 00:50:03 | INFO    | orchestrator | ======================================================================
+2026-06-22 00:50:03 | INFO    | excel_writer | 📋 Copying template → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\PORTFOLIO_MODEL_UPDATED_20260622_005003.xlsx
+2026-06-22 00:50:05 | INFO    | excel_writer |    Nifty 500: 12198 cell updates across 498 rows
+2026-06-22 00:50:05 | INFO    | excel_writer |    S&P 500: 14922 cell updates across 503 rows
+2026-06-22 00:50:05 | INFO    | excel_writer |    EQUITY MF: 30751 cell updates across 1649 rows
+2026-06-22 00:50:06 | INFO    | excel_writer |    DEBT MF: 10346 cell updates across 462 rows
+2026-06-22 00:50:06 | INFO    | excel_writer |    REITINVIT: 213 cell updates across 11 rows
+2026-06-22 00:50:08 | INFO    | excel_writer | ✅ Excel saved → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\PORTFOLIO_MODEL_UPDATED_20260622_005003.xlsx
+2026-06-22 00:50:08 | INFO    | orchestrator | 
+🎉 SUCCESS — updated workbook at: C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\PORTFOLIO_MODEL_UPDATED_20260622_005003.xlsx
+2026-06-22 00:50:08 | INFO    | orchestrator | 
+⏱  Total time: 6.6 minutes

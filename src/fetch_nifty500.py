@@ -185,6 +185,9 @@ def process_stock(company_name: str, industry: str, ticker: str = None) -> dict:
     if not ticker or pd.isna(ticker):
         ticker = company_name_to_ticker(company_name)
 
+    if ticker in ("UNLISTED", "DELISTED"):
+        return {"Company Name": company_name, "Industry": industry, "_ticker": ticker, "_status": ticker}
+
     # Price history
     try:
         hist = fetch_yfinance_data(ticker, period="1y")

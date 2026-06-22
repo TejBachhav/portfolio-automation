@@ -95,6 +95,11 @@ def fuzzy_match_schemes(user_schemes: pd.DataFrame, amfi_df: pd.DataFrame) -> pd
     """
     log.info(f"🔗 Matching {len(user_schemes)} user schemes to AMFI master…")
 
+    # Manual mapping for renamed/special cases
+    MANUAL_LOOKUP = {
+        "HDFC Non-Cyclical Consumer Fund Reg (G)": "151803",
+    }
+
     # Normalize for matching
     def normalize(s: str) -> str:
         if not isinstance(s, str):
@@ -106,6 +111,7 @@ def fuzzy_match_schemes(user_schemes: pd.DataFrame, amfi_df: pd.DataFrame) -> pd
             "FOF": "FUND OF FUND", "E T F": "ETF", " ETF ": " ETF ",
             "SL ": "SUN LIFE ", "MF ": " ", " PRU ": " PRUDENTIAL ",
             "MUTUAL FUND": "", "FUND": "", "SCHEME": "",
+            "INFRA": "INFRASTRUCTURE", "ECO": "ECONOMIC", "STD": "STANDARD",
             "  ": " ",
         }
         for k, v in replacements.items():
@@ -118,27 +124,51 @@ def fuzzy_match_schemes(user_schemes: pd.DataFrame, amfi_df: pd.DataFrame) -> pd
     amfi_df["_norm"] = amfi_df["scheme_name"].apply(normalize)
     amfi_df["_tokens"] = amfi_df["_norm"].apply(lambda x: set(x.split()))
     
+    # Pre-unpack dataframe to plain Python list of tuples for 100x speedup
+    amfi_list = list(zip(amfi_df["scheme_code"], amfi_df["scheme_name"], amfi_df["nav"], amfi_df["nav_date"], amfi_df["_tokens"]))
+    
     matches = []
     for _, row in user_schemes.iterrows():
-        user_norm = normalize(row["scheme_name"])
+        user_name = row["scheme_name"]
+        
+        # Check manual overrides
+        if user_name in MANUAL_LOOKUP:
+            code = MANUAL_LOOKUP[user_name]
+            amfi_match = amfi_df[amfi_df["scheme_code"] == code]
+            if not amfi_match.empty:
+                matches.append({
+                    "scheme_name": user_name,
+                    "category": row.get("category", ""),
+                    "scheme_code": code,
+                    "matched_amfi_name": amfi_match.iloc[0]["scheme_name"],
+                    "current_nav": amfi_match.iloc[0]["nav"],
+                    "nav_date": amfi_match.iloc[0]["nav_date"],
+                    "match_score": 1.0,
+                })
+                continue
+
+        user_norm = normalize(user_name)
         user_tokens = set(user_norm.split())
 
         # Score each AMFI scheme by token overlap
         best_score = 0
         best_match = None
-        for _, a_row in amfi_df.iterrows():
-            a_tokens = a_row["_tokens"]
+        for a_code, a_name, a_nav, a_date, a_tokens in amfi_list:
             if not a_tokens or not user_tokens:
                 continue
-            # Jaccard-like score
             overlap = len(user_tokens & a_tokens)
             score = overlap / max(len(user_tokens), len(a_tokens))
             if score > best_score:
                 best_score = score
-                best_match = a_row
+                best_match = {
+                    "scheme_code": a_code,
+                    "scheme_name": a_name,
+                    "nav": a_nav,
+                    "nav_date": a_date
+                }
         if best_match is not None and best_score >= 0.5:
             matches.append({
-                "scheme_name": row["scheme_name"],
+                "scheme_name": user_name,
                 "category": row.get("category", ""),
                 "scheme_code": best_match["scheme_code"],
                 "matched_amfi_name": best_match["scheme_name"],
@@ -148,7 +178,7 @@ def fuzzy_match_schemes(user_schemes: pd.DataFrame, amfi_df: pd.DataFrame) -> pd
             })
         else:
             matches.append({
-                "scheme_name": row["scheme_name"],
+                "scheme_name": user_name,
                 "category": row.get("category", ""),
                 "scheme_code": None,
                 "matched_amfi_name": None,

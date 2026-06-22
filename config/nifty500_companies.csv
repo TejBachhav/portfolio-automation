@@ -28,11 +28,11 @@ Ramkrishna Forgings Ltd.,Automobile and Auto Components,RKFORGE.NS
 Schaeffler India Ltd.,Automobile and Auto Components,SCHAEFFLER.NS
 Sona BLW Precision Forgings Ltd.,Automobile and Auto Components,SONACOMS.NS
 Sundram Fasteners Ltd.,Automobile and Auto Components,SUNDRMFAST.NS
-Tata Motors Passenger Vehicles Ltd.,Automobile and Auto Components,TATAMOTORS.NS
+Tata Motors Passenger Vehicles Ltd.,Automobile and Auto Components,TMPV.NS
 Tube Investments of India Ltd.,Automobile and Auto Components,TIINDIA.NS
 TVS Motor Company Ltd.,Automobile and Auto Components,TVSMOTOR.NS
 UNO Minda Ltd.,Automobile and Auto Components,UNOMINDA.NS
-ZF Commercial Vehicle Control Systems India Ltd.,Automobile and Auto Components,ZFINDIA.NS
+ZF Commercial Vehicle Control Systems India Ltd.,Automobile and Auto Components,ZFCVINDIA.NS
 HDFC Bank Ltd.,Banking,HDFCBANK.NS
 State Bank of India,Banking,SBIN.NS
 ICICI Bank Ltd.,Banking,ICICIBANK.NS
@@ -207,9 +207,9 @@ Sapphire Foods India Ltd.,Consumer Services,SAPPHIRE.NS
 Swiggy Ltd.,Consumer Services,SWIGGY.NS
 TBO Tek Ltd.,Consumer Services,TBOTEK.NS
 Trent Ltd.,Consumer Services,TRENT.NS
-Valor Estate Ltd.,Consumer Services,VALOR.NS
+Valor Estate Ltd.,Consumer Services,DBREALTY.NS
 Vedant Fashions Ltd.,Consumer Services,MANYAVAR.NS
-Ventive Hospitality Ltd.,Consumer Services,
+Ventive Hospitality Ltd.,Consumer Services,UNLISTED
 Vishal Mega Mart Ltd.,Consumer Services,VMM.NS
 Bharat Electronics Ltd.,Defence,BEL.NS
 Hindustan Aeronautics Ltd.,Defence,HAL.NS
@@ -235,7 +235,7 @@ E.I.D. Parry (India) Ltd.,Fast Moving Consumer Goods,EIDPARRY.NS
 Emami Ltd.,Fast Moving Consumer Goods,EMAMILTD.NS
 Gillette India Ltd.,Fast Moving Consumer Goods,GILLETTE.NS
 Godfrey Phillips India Ltd.,Fast Moving Consumer Goods,GODFRYPHLP.NS
-Godrej Agrovet Ltd.,Fast Moving Consumer Goods,GAVL.NS
+Godrej Agrovet Ltd.,Fast Moving Consumer Goods,GODREJAGRO.NS
 Godrej Consumer Products Ltd.,Fast Moving Consumer Goods,GODREJCP.NS
 Hindustan Unilever Ltd.,Fast Moving Consumer Goods,HINDUNILVR.NS
 Honasa Consumer Ltd.,Fast Moving Consumer Goods,HONASA.NS
@@ -324,7 +324,7 @@ UTI Asset Management Company Ltd.,Financial Services,UTIAMC.NS
 Aditya Birla Real Estate Ltd.,Realty,ABREL.NS
 Apollo Hospitals Enterprise Ltd.,Healthcare,APOLLOHOSP.NS
 Aster DM Healthcare Ltd.,Healthcare,ASTERDM.NS
-Dr. Agarwal's Health Care Ltd.,Healthcare,
+Dr. Agarwal's Health Care Ltd.,Healthcare,AGARWALEYE.NS
 Dr. Lal Path Labs Ltd.,Healthcare,LALPATHLAB.NS
 Fortis Healthcare Ltd.,Healthcare,FORTIS.NS
 Global Health Ltd.,Healthcare,MEDANTA.NS
@@ -341,7 +341,7 @@ Birlasoft Ltd.,Information Technology,BSOFT.NS
 C.E. Info Systems Ltd.,Information Technology,MAPMYINDIA.NS
 Coforge Ltd.,Information Technology,COFORGE.NS
 Cyient Ltd.,Information Technology,CYIENT.NS
-Happiest Minds Technologies Ltd.,Information Technology,HAPPIESTMND.NS
+Happiest Minds Technologies Ltd.,Information Technology,HAPPSTMNDS.NS
 HCL Technologies Ltd.,Information Technology,HCLTECH.NS
 Hexaware Technologies Ltd.,Information Technology,HEXT.NS
 Infosys Ltd.,Information Technology,INFY.NS
@@ -350,7 +350,7 @@ Inventurus Knowledge Solutions Ltd.,Information Technology,IKS.NS
 KPIT Technologies Ltd.,Information Technology,KPITTECH.NS
 L&T Technology Services Ltd.,Information Technology,LTTS.NS
 Latent View Analytics Ltd.,Information Technology,LATENTVIEW.NS
-LTIMindtree Ltd.,Information Technology,LTIM.NS
+LTIMindtree Ltd.,Information Technology,LTM.NS
 MphasiS Ltd.,Information Technology,MPHASIS.NS
 Netweb Technologies India Ltd.,Information Technology,NETWEB.NS
 Newgen Software Technologies Ltd.,Information Technology,NEWGEN.NS
@@ -392,7 +392,7 @@ Bharat Petroleum Corporation Ltd.,Oil Gas & Consumable Fuels,BPCL.NS
 Castrol India Ltd.,Oil Gas & Consumable Fuels,CASTROLIND.NS
 Coal India Ltd.,Oil Gas & Consumable Fuels,COALINDIA.NS
 GAIL (India) Ltd.,Oil Gas & Consumable Fuels,GAIL.NS
-Gujarat State Petronet Ltd.,Oil Gas & Consumable Fuels,GSPL.NS
+Gujarat State Petronet Ltd.,Oil Gas & Consumable Fuels,DELISTED
 Gujarat Gas Ltd.,Oil Gas & Consumable Fuels,GUJGASLTD.NS
 Hindustan Petroleum Corporation Ltd.,Oil Gas & Consumable Fuels,HINDPETRO.NS
 Indian Oil Corporation Ltd.,Oil Gas & Consumable Fuels,IOC.NS
@@ -485,14 +485,14 @@ Firstsource Solutions Ltd.,Services,FSL.NS
 eClerx Services Ltd.,Services,ECLERX.NS
 Redington Ltd.,Services,REDINGTON.NS
 Great Eastern Shipping Co. Ltd.,Services,GESHIP.NS
-International Gemmological Institute (India) Ltd.,Services,
+International Gemmological Institute (India) Ltd.,Services,UNLISTED
 Blue Dart Express Ltd.,Services,BLUEDART.NS
 Tata Communications Ltd.,Telecommunication,TATACOMM.NS
 MMTC Ltd.,Services,MMTC.NS
 Tata Teleservices (Maharashtra) Ltd.,Telecommunication,TTML.NS
 Tejas Networks Ltd.,Telecommunication,TEJASNET.NS
 Vodafone Idea Ltd.,Telecommunication,IDEA.NS
-Alok Industries Ltd.,Textiles,ALOKIND.NS
+Alok Industries Ltd.,Textiles,ALOKINDS.NS
 K.P.R. Mill Ltd.,Textiles,KPRMILL.NS
 Page Industries Ltd.,Textiles,PAGEIND.NS
 Trident Ltd.,Textiles,TRIDENT.NS

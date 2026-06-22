@@ -525,3 +525,157 @@
 2026-06-21 18:49:24 | INFO    | mutual_funds | 📥 Downloading AMFI NAV master file…
 2026-06-21 18:49:25 | INFO    | mutual_funds |    AMFI: parsed 14219 schemes
 2026-06-21 18:49:25 | INFO    | mutual_funds | 🔗 Matching 1649 user schemes to AMFI master…
+2026-06-21 18:59:51 | INFO    | orchestrator | ======================================================================
+2026-06-21 18:59:51 | INFO    | orchestrator | 🚀 PORTFOLIO MODEL UPDATE — started 2026-06-21 18:59:51.084968
+2026-06-21 18:59:51 | INFO    | orchestrator |    Mode: all  |  Test: False  |  Template: PERSONALISED_PORTFOLIO_ALLOCATION_MODEL_.xlsx
+2026-06-21 18:59:51 | INFO    | orchestrator | ======================================================================
+2026-06-21 18:59:51 | INFO    | nifty500 | 📊 Starting Nifty 500 fetch for 498 stocks…
+2026-06-21 19:00:27 | INFO    | nifty500 |    Progress: 25/498 (5.0%)
+2026-06-21 19:00:48 | WARNING | nifty500 |   ⚠️  No data for Tata Motors Passenger Vehicles Ltd. (TATAMOTORS.NS): Empty or insufficient history for TATAMOTORS.NS
+2026-06-21 19:01:06 | WARNING | nifty500 |   ⚠️  No data for ZF Commercial Vehicle Control Systems India Ltd. (ZFINDIA.NS): Empty or insufficient history for ZFINDIA.NS
+2026-06-21 19:01:32 | INFO    | nifty500 |    Progress: 50/498 (10.0%)
+2026-06-21 19:02:12 | INFO    | nifty500 |    Progress: 75/498 (15.1%)
+2026-06-21 19:02:51 | INFO    | nifty500 |    Progress: 100/498 (20.1%)
+2026-06-21 19:03:30 | INFO    | nifty500 |    Progress: 125/498 (25.1%)
+2026-06-21 19:04:14 | INFO    | nifty500 |    Progress: 150/498 (30.1%)
+2026-06-21 19:04:51 | INFO    | nifty500 |    Progress: 175/498 (35.1%)
+2026-06-21 19:05:30 | INFO    | nifty500 |    Progress: 200/498 (40.2%)
+2026-06-21 19:05:53 | WARNING | nifty500 |   ⚠️  No data for Valor Estate Ltd. (VALOR.NS): Empty or insufficient history for VALOR.NS
+2026-06-21 19:06:20 | INFO    | nifty500 |    Progress: 225/498 (45.2%)
+2026-06-21 19:06:47 | WARNING | nifty500 |   ⚠️  No data for Godrej Agrovet Ltd. (GAVL.NS): Empty or insufficient history for GAVL.NS
+2026-06-21 19:07:09 | INFO    | nifty500 |    Progress: 250/498 (50.2%)
+2026-06-21 19:07:49 | INFO    | nifty500 |    Progress: 275/498 (55.2%)
+2026-06-21 19:08:37 | INFO    | nifty500 |    Progress: 300/498 (60.2%)
+2026-06-21 19:09:28 | WARNING | nifty500 |   ⚠️  No data for Dr. Agarwal's Health Care Ltd. (DR.NS): Empty or insufficient history for DR.NS
+2026-06-21 19:09:28 | INFO    | nifty500 |    Progress: 325/498 (65.3%)
+2026-06-21 19:10:05 | WARNING | nifty500 |   ⚠️  No data for Happiest Minds Technologies Ltd. (HAPPIESTMND.NS): Empty or insufficient history for HAPPIESTMND.NS
+2026-06-21 19:10:19 | INFO    | nifty500 |    Progress: 350/498 (70.3%)
+2026-06-21 19:10:31 | WARNING | nifty500 |   ⚠️  No data for LTIMindtree Ltd. (LTIM.NS): Empty or insufficient history for LTIM.NS
+2026-06-21 19:11:09 | INFO    | nifty500 |    Progress: 375/498 (75.3%)
+2026-06-21 19:11:47 | WARNING | nifty500 |   ⚠️  No data for Gujarat State Petronet Ltd. (GSPL.NS): Empty or insufficient history for GSPL.NS
+2026-06-21 19:11:59 | INFO    | nifty500 |    Progress: 400/498 (80.3%)
+2026-06-21 19:12:37 | INFO    | nifty500 |    Progress: 425/498 (85.3%)
+2026-06-21 19:13:19 | INFO    | nifty500 |    Progress: 450/498 (90.4%)
+2026-06-21 19:13:59 | INFO    | nifty500 |    Progress: 475/498 (95.4%)
+2026-06-21 19:14:26 | WARNING | nifty500 |   ⚠️  No data for International Gemmological Institute (India) Ltd. (INTERNATIONAL.NS): Empty or insufficient history for INTERNATIONAL.NS
+2026-06-21 19:14:49 | WARNING | nifty500 |   ⚠️  No data for Alok Industries Ltd. (ALOKIND.NS): Empty or insufficient history for ALOKIND.NS
+2026-06-21 19:14:57 | INFO    | nifty500 | ✅ Nifty 500 done. 498 rows → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\nifty500_latest.csv
+2026-06-21 19:14:57 | INFO    | sp500 | 📊 Starting S&P 500 fetch for 503 tickers…
+2026-06-21 19:15:25 | INFO    | sp500 |    Progress: 25/503 (5.0%)
+2026-06-21 19:15:53 | INFO    | sp500 |    Progress: 50/503 (9.9%)
+2026-06-21 19:16:20 | INFO    | sp500 |    Progress: 75/503 (14.9%)
+2026-06-21 19:16:48 | INFO    | sp500 |    Progress: 100/503 (19.9%)
+2026-06-21 19:17:15 | INFO    | sp500 |    Progress: 125/503 (24.9%)
+2026-06-21 19:30:40 | WARNING | sp500 |   ⚠️  No data for DAY: Empty or insufficient history for DAY
+2026-06-21 19:30:58 | INFO    | sp500 |    Progress: 150/503 (29.8%)
+2026-06-21 19:31:18 | INFO    | sp500 |    Progress: 175/503 (34.8%)
+2026-06-21 19:31:40 | INFO    | sp500 |    Progress: 200/503 (39.8%)
+2026-06-21 19:32:00 | INFO    | sp500 |    Progress: 225/503 (44.7%)
+2026-06-21 19:32:13 | WARNING | sp500 |   ⚠️  No data for HOLX: Empty or insufficient history for HOLX
+2026-06-21 19:32:32 | INFO    | sp500 |    Progress: 250/503 (49.7%)
+2026-06-21 19:32:54 | INFO    | sp500 |    Progress: 275/503 (54.7%)
+2026-06-21 19:33:14 | INFO    | sp500 |    Progress: 300/503 (59.6%)
+2026-06-21 19:33:40 | INFO    | sp500 |    Progress: 325/503 (64.6%)
+2026-06-21 19:34:04 | INFO    | sp500 |    Progress: 350/503 (69.6%)
+2026-06-21 19:34:26 | INFO    | sp500 |    Progress: 375/503 (74.6%)
+2026-06-21 19:34:46 | INFO    | sp500 |    Progress: 400/503 (79.5%)
+2026-06-21 19:35:06 | INFO    | sp500 |    Progress: 425/503 (84.5%)
+2026-06-21 19:35:28 | INFO    | sp500 |    Progress: 450/503 (89.5%)
+2026-06-21 19:35:51 | INFO    | sp500 |    Progress: 475/503 (94.4%)
+2026-06-21 19:36:13 | INFO    | sp500 |    Progress: 500/503 (99.4%)
+2026-06-21 19:36:15 | INFO    | sp500 | ✅ S&P 500 done. 503 rows → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\sp500_latest.csv
+2026-06-21 19:36:15 | INFO    | mutual_funds | 🚀 Starting EQUITY MF fetch…
+2026-06-21 19:36:15 | INFO    | mutual_funds | 📥 Downloading AMFI NAV master file…
+2026-06-21 19:36:17 | INFO    | mutual_funds |    AMFI: parsed 14219 schemes
+2026-06-21 19:36:17 | INFO    | mutual_funds | 🔗 Matching 1649 user schemes to AMFI master…
+2026-06-21 20:09:01 | INFO    | mutual_funds |    Matched 1640/1649 (99.5%)
+2026-06-21 20:09:01 | INFO    | mutual_funds | ⏳ Computing analytics for 1649 schemes (this takes time — be patient)…
+2026-06-21 20:11:27 | INFO    | mutual_funds |    Progress: 50/1649 (3.0%)
+2026-06-21 20:12:35 | INFO    | mutual_funds |    Progress: 100/1649 (6.1%)
+2026-06-21 20:14:50 | INFO    | mutual_funds |    Progress: 150/1649 (9.1%)
+2026-06-21 20:16:50 | INFO    | mutual_funds |    Progress: 200/1649 (12.1%)
+2026-06-21 20:18:51 | INFO    | mutual_funds |    Progress: 250/1649 (15.2%)
+2026-06-21 20:21:21 | INFO    | mutual_funds |    Progress: 300/1649 (18.2%)
+2026-06-21 20:24:02 | INFO    | mutual_funds |    Progress: 350/1649 (21.2%)
+2026-06-21 20:25:39 | INFO    | mutual_funds |    Progress: 400/1649 (24.3%)
+2026-06-21 20:28:10 | INFO    | mutual_funds |    Progress: 450/1649 (27.3%)
+2026-06-21 20:29:02 | WARNING | mutual_funds |    ⚠️  No history for Kotak Infra & Eco Reform Std (G): Scheme code is NaN
+2026-06-21 20:30:21 | INFO    | mutual_funds |    Progress: 500/1649 (30.3%)
+2026-06-21 20:32:43 | INFO    | mutual_funds |    Progress: 550/1649 (33.4%)
+2026-06-21 20:33:54 | WARNING | mutual_funds |    ⚠️  No history for HDFC Non-Cyclical Consumer Fund Reg (G): Scheme code is NaN
+2026-06-21 20:34:49 | INFO    | mutual_funds |    Progress: 600/1649 (36.4%)
+2026-06-21 20:37:19 | INFO    | mutual_funds |    Progress: 650/1649 (39.4%)
+2026-06-21 20:39:25 | INFO    | mutual_funds |    Progress: 700/1649 (42.4%)
+2026-06-21 20:40:49 | WARNING | mutual_funds |    ⚠️  No history for Mahindra Manulife Value Fund Reg (G): HTTPSConnectionPool(host='api.mfapi.in', port=443): Read timed out. (read timeout=15)
+2026-06-21 20:41:33 | INFO    | mutual_funds |    Progress: 750/1649 (45.5%)
+2026-06-21 20:43:26 | INFO    | mutual_funds |    Progress: 800/1649 (48.5%)
+2026-06-21 20:45:33 | INFO    | mutual_funds |    Progress: 850/1649 (51.5%)
+2026-06-21 20:47:25 | INFO    | mutual_funds |    Progress: 900/1649 (54.6%)
+2026-06-21 20:49:28 | INFO    | mutual_funds |    Progress: 950/1649 (57.6%)
+2026-06-21 20:51:36 | INFO    | mutual_funds |    Progress: 1000/1649 (60.6%)
+2026-06-21 20:53:31 | INFO    | mutual_funds |    Progress: 1050/1649 (63.7%)
+2026-06-21 20:56:00 | INFO    | mutual_funds |    Progress: 1100/1649 (66.7%)
+2026-06-21 20:58:07 | INFO    | mutual_funds |    Progress: 1150/1649 (69.7%)
+2026-06-21 21:00:54 | INFO    | mutual_funds |    Progress: 1200/1649 (72.8%)
+2026-06-21 21:03:29 | WARNING | mutual_funds |    ⚠️  No history for Samco Small Cap Fund Reg (G): HTTPSConnectionPool(host='api.mfapi.in', port=443): Read timed out. (read timeout=15)
+2026-06-21 21:03:51 | INFO    | mutual_funds |    Progress: 1250/1649 (75.8%)
+2026-06-21 21:05:33 | INFO    | mutual_funds |    Progress: 1300/1649 (78.8%)
+2026-06-21 21:07:20 | INFO    | mutual_funds |    Progress: 1350/1649 (81.9%)
+2026-06-21 21:09:06 | INFO    | mutual_funds |    Progress: 1400/1649 (84.9%)
+2026-06-21 21:11:36 | INFO    | mutual_funds |    Progress: 1450/1649 (87.9%)
+2026-06-21 21:14:09 | INFO    | mutual_funds |    Progress: 1500/1649 (91.0%)
+2026-06-21 21:16:09 | INFO    | mutual_funds |    Progress: 1550/1649 (94.0%)
+2026-06-21 21:28:52 | INFO    | mutual_funds |    Progress: 1600/1649 (97.0%)
+2026-06-21 21:30:23 | WARNING | mutual_funds |    ⚠️  No history for QSIF Equity Long-Short Fund Reg (G): Scheme code is NaN
+2026-06-21 21:30:29 | WARNING | mutual_funds |    ⚠️  No history for QSIF Equity Ex-Top 100 Long-Short Fund Reg (G): Scheme code is NaN
+2026-06-21 21:30:35 | WARNING | mutual_funds |    ⚠️  No history for DIVINITI Equity Long Short Fund Reg (G): Scheme code is NaN
+2026-06-21 21:30:41 | WARNING | mutual_funds |    ⚠️  No history for QSIF Hybrid Long-Short Fund Reg (G): Scheme code is NaN
+2026-06-21 21:30:47 | WARNING | mutual_funds |    ⚠️  No history for Edelweiss SIF Altiva Hybrid Long-Short Fund Reg (G): Scheme code is NaN
+2026-06-21 21:30:54 | WARNING | mutual_funds |    ⚠️  No history for SBI SIF Magnum Hybrid Long Short Fund Reg (G): Scheme code is NaN
+2026-06-21 21:31:00 | WARNING | mutual_funds |    ⚠️  No history for Titanium Hybrid Long-Short Fund (G): Scheme code is NaN
+2026-06-21 21:31:00 | INFO    | mutual_funds | ✅ EQUITY MF done. 1649 rows → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\equity_mf_latest.csv
+2026-06-21 21:31:00 | INFO    | mutual_funds | 🚀 Starting DEBT MF fetch…
+2026-06-21 21:31:00 | INFO    | mutual_funds | 📥 Downloading AMFI NAV master file…
+2026-06-21 21:31:02 | INFO    | mutual_funds |    AMFI: parsed 14219 schemes
+2026-06-21 21:31:02 | INFO    | mutual_funds | 🔗 Matching 462 user schemes to AMFI master…
+2026-06-21 21:39:06 | INFO    | mutual_funds |    Matched 462/462 (100.0%)
+2026-06-21 21:39:06 | INFO    | mutual_funds | ⏳ Computing analytics for 462 schemes (this takes time — be patient)…
+2026-06-21 21:40:56 | INFO    | mutual_funds |    Progress: 50/462 (10.8%)
+2026-06-21 22:31:22 | INFO    | mutual_funds |    Progress: 100/462 (21.6%)
+2026-06-21 22:32:33 | INFO    | mutual_funds |    Progress: 150/462 (32.5%)
+2026-06-21 22:35:00 | INFO    | mutual_funds |    Progress: 200/462 (43.3%)
+2026-06-21 22:36:58 | INFO    | mutual_funds |    Progress: 250/462 (54.1%)
+2026-06-21 22:39:10 | INFO    | mutual_funds |    Progress: 300/462 (64.9%)
+2026-06-21 22:41:31 | INFO    | mutual_funds |    Progress: 350/462 (75.8%)
+2026-06-21 22:44:30 | INFO    | mutual_funds |    Progress: 400/462 (86.6%)
+2026-06-21 22:46:27 | INFO    | mutual_funds |    Progress: 450/462 (97.4%)
+2026-06-21 22:46:49 | INFO    | mutual_funds | ✅ DEBT MF done. 462 rows → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\debt_mf_latest.csv
+2026-06-21 22:46:49 | INFO    | reit_invit | 📊 Starting REIT/InvIT fetch for 11 instruments…
+2026-06-21 22:46:49 | INFO    | reit_invit |   Processing EMBASSY — Embassy Office Parks REIT
+2026-06-21 22:46:51 | INFO    | reit_invit |   Processing MINDSPACE — Mindspace Business Parks REIT
+2026-06-21 22:46:52 | INFO    | reit_invit |   Processing NXST — Nexus Select Trust
+2026-06-21 22:46:53 | INFO    | reit_invit |   Processing INDIGRID — India Grid Trust
+2026-06-21 22:46:55 | INFO    | reit_invit |   Processing PGINVIT — PowerGrid Infrastructure InvIT
+2026-06-21 22:46:56 | INFO    | reit_invit |   Processing IRBINVIT — IRB InvIT Fund
+2026-06-21 22:46:57 | INFO    | reit_invit |   Processing BIRET — Brookfield India Real Estate Trust
+2026-06-21 22:46:59 | INFO    | reit_invit |   Processing 360ONE — 360 ONE Real Estate Investment Trust
+2026-06-21 22:47:00 | INFO    | reit_invit |   Processing INDUSTOWER — Indus Towers Limited
+2026-06-21 22:47:01 | INFO    | reit_invit |   Processing IRISDOTML — Iris Infratel Trust
+2026-06-21 22:47:12 | WARNING | reit_invit |   ⚠️  Failed to fetch IRISDOTML: Empty or insufficient history for IRISDOTML.NS
+2026-06-21 22:47:13 | INFO    | reit_invit |   Processing INDIGRIDL — India Grid Infrastructure Trust
+2026-06-21 22:47:14 | INFO    | reit_invit | ✅ REIT/InvIT done. 11 rows → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\reit_invit_latest.csv
+2026-06-21 22:47:14 | INFO    | orchestrator | 
+======================================================================
+2026-06-21 22:47:14 | INFO    | orchestrator | 📊 WRITING BACK TO EXCEL
+2026-06-21 22:47:14 | INFO    | orchestrator | ======================================================================
+2026-06-21 22:47:14 | INFO    | excel_writer | 📋 Copying template → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\PORTFOLIO_MODEL_UPDATED_20260621_224714.xlsx
+2026-06-21 22:47:18 | INFO    | excel_writer |    Nifty 500: 12043 cell updates across 498 rows
+2026-06-21 22:47:19 | INFO    | excel_writer |    S&P 500: 14922 cell updates across 503 rows
+2026-06-21 22:47:20 | INFO    | excel_writer |    EQUITY MF: 30696 cell updates across 1649 rows
+2026-06-21 22:47:20 | INFO    | excel_writer |    DEBT MF: 10346 cell updates across 462 rows
+2026-06-21 22:47:20 | INFO    | excel_writer |    REITINVIT: 213 cell updates across 11 rows
+2026-06-21 22:47:25 | INFO    | excel_writer | ✅ Excel saved → C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\PORTFOLIO_MODEL_UPDATED_20260621_224714.xlsx
+2026-06-21 22:47:25 | INFO    | orchestrator | 
+🎉 SUCCESS — updated workbook at: C:\Users\Tej Bachhav\.gemini\antigravity-ide\scratch\portfolio-automation\output\PORTFOLIO_MODEL_UPDATED_20260621_224714.xlsx
+2026-06-21 22:47:25 | INFO    | orchestrator | 
+⏱  Total time: 227.6 minutes
